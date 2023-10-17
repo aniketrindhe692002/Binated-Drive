@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+        form {
+            margin: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+
+    <h2>Create New Blog Post</h2>
+    <form id="blogForm">
+        <table>
+            <tr>
+                <td><label for="title">Title:</label></td>
+                <td><input type="text" id="title" name="title" required></td>
+            </tr>
+            <tr>
+                <td><label for="content">Content:</label></td>
+                <td><textarea id="content" name="content" rows="4" required></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button class="btn" type="submit">Create</button></td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Blog Post List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Existing and new blog posts will be displayed here -->
+        </tbody>
+    </table>
+
+    <script>
+        // JavaScript code for adding new blog posts to the list
+        const blogForm = document.getElementById('blogForm');
+        const blogList = document.querySelector('table tbody');
+
+        blogForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            // Get input values
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            // Create a new row for the table
+            const newRow = blogList.insertRow(0);
+
+            // Add cells with the title, content, and action buttons
+            const titleCell = newRow.insertCell(0);
+            const contentCell = newRow.insertCell(1);
+            const actionsCell = newRow.insertCell(2);
+
+            titleCell.textContent = title;
+            contentCell.textContent = content;
+
+            const editButton = document.createElement('button');
+            editButton.className = 'btn';
+            editButton.textContent = 'Edit';
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'btn';
+            deleteButton.textContent = 'Delete';
+
+            actionsCell.appendChild(editButton);
+            actionsCell.appendChild(deleteButton);
+
+            // Clear the form inputs
+            document.getElementById('title').value = '';
+            document.getElementById('content').value = '';
+        });
+    </script>
+</body>
+</html>
